@@ -55,8 +55,6 @@ public class DepthFirstSearchAlg {
 		iterateInterno(visited, stack, root, f);
 	}
 	
-	
-	
 	// Function<Stack<String>, Boolean> f
 	private void iterateInterno(
 		List<String> visited, Stack<String> stack, Vertex root, VertexVisitor f) {
