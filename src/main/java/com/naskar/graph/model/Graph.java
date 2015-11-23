@@ -1,8 +1,7 @@
 package com.naskar.graph.model;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Graph {
@@ -11,6 +10,10 @@ public class Graph {
 	
 	public Graph() {
 		this.vertices = new HashMap<String, Vertex>();
+	}
+	
+	public void addEdge(String from, String to) {
+		this.addEdge(from, to, 1);
 	}
 	
 	public void addEdge(String from, String to, int weight) {
@@ -46,10 +49,12 @@ public class Graph {
 		return this.vertices.get(node);
 	}
 	
-	public List<Vertex> getVertices() {
-		List<Vertex> list = new ArrayList<Vertex>();
-		list.addAll(this.vertices.values());
-		return list;
+	public Collection<Vertex> getVertices() {
+		return this.vertices.values();
+	}
+	
+	public int getSizeVertices() {
+		return this.vertices.size();
 	}
 
 }

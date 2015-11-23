@@ -1,9 +1,8 @@
 package com.naskar.graph.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Vertex {
 	
@@ -34,10 +33,12 @@ public class Vertex {
 		this.adjacencies.remove(v);
 	}
 	
-	public List<Vertex> getAdjacencies() {
-		List<Vertex> list = new ArrayList<Vertex>();
-		list.addAll(adjacencies.keySet());
-		return list;
+	public Set<Vertex> getAdjacencies() {
+		return this.adjacencies.keySet();
+	}
+	
+	public int getAdjacenciesSize() {
+		return this.adjacencies.size();
 	}
 	
 	public String getId() {

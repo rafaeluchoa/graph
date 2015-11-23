@@ -1,0 +1,74 @@
+package com.naskar.graph.game;
+
+import java.io.InputStream;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+import com.naskar.graph.algorithms.DepthFirstSearchAlg;
+import com.naskar.graph.model.Graph;
+
+public class Player {
+
+    public static void main(String args[]) {
+    	new Player().run(System.in);
+    }
+    
+    public void run(InputStream input) {
+        Scanner in = new Scanner(input);
+        int N = in.nextInt(); // the total number of nodes in the level, including the gateways
+        int L = in.nextInt(); // the number of links
+        int E = in.nextInt(); // the number of exit gateways
+        
+        Graph g = new Graph();
+        
+        for (int i = 0; i < L; i++) {
+            int N1 = in.nextInt(); // N1 and N2 defines a link between these nodes
+            int N2 = in.nextInt();
+            
+            g.addEdge(String.valueOf(N1), String.valueOf(N2), 1);
+            g.addEdge(String.valueOf(N2), String.valueOf(N1), 1);
+        }
+        
+        
+        int[] targets = new int[E];
+        for (int i = 0; i < E; i++) {
+            int EI = in.nextInt(); // the index of a gateway node
+            targets[i] = EI;
+        }
+
+        // game loop
+        DepthFirstSearchAlg alg = new DepthFirstSearchAlg();
+        while (true) {
+            int SI = in.nextInt(); // The index of the node on which the Skynet agent is positioned this turn
+            
+            List<String> minorPath = null;
+            for(int i = 0; i < E; i++) {
+                
+                List<List<String>> paths = alg.findPaths(
+                	g, String.valueOf(SI), String.valueOf(targets[i]),
+                			minorPath != null ? minorPath.size() : Integer.MAX_VALUE);
+                if(paths != null && !paths.isEmpty()) {
+            		
+            		List<String> path = paths.get(0);
+            		if(minorPath == null || path.size() < minorPath.size()) {
+            		    minorPath = path;
+            		}
+            		
+                }
+            }
+
+            if(minorPath != null) {
+                
+                String v1 = minorPath.get(minorPath.size()-2);
+                String v2 = minorPath.get(minorPath.size()-1);
+                
+                g.getVertex(v1).removeAdjacency(g.getVertex(v2));
+                g.getVertex(v2).removeAdjacency(g.getVertex(v1));
+                
+                System.out.println(v1 + " " + v2);
+            }
+            
+        }
+    }
+}
