@@ -104,7 +104,7 @@ public class DepthFirstSearchAlgTest {
 		g.addEdge("E", "B");
 		g.addEdge("A", "E");
 		
-		List<String> expected = Arrays.asList("A", "D", "C");
+		List<String> expected = Arrays.asList("A", "B", "C");
 		
 		// Act
 		List<String> actual = target.findPath(g, "A", "C");

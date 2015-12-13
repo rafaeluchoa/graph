@@ -1,5 +1,6 @@
 package com.naskar.graph.model;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -37,6 +38,10 @@ public class Vertex {
 		return this.adjacencies.keySet();
 	}
 	
+	public Collection<Integer> getWeights() {
+		return this.adjacencies.values();
+	}
+	
 	public int getAdjacenciesSize() {
 		return this.adjacencies.size();
 	}
@@ -48,6 +53,11 @@ public class Vertex {
 	@Override
 	public String toString() {
 		return id;
+	}
+	
+	@Override
+	public int hashCode() {
+		return id.hashCode();
 	}
 	
 }

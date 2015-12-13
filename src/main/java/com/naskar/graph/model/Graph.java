@@ -40,8 +40,10 @@ public class Graph {
 	
 	public void removeVertice(String id) {
 		Vertex s = this.vertices.remove(id);
-		for(Vertex v : this.vertices.values()) {
-			s.removeAdjacency(v);
+		if(s != null) { 
+			for(Vertex v : this.vertices.values()) {
+				s.removeAdjacency(v);
+			}
 		}
 	}
 
@@ -55,6 +57,11 @@ public class Graph {
 	
 	public int getSizeVertices() {
 		return this.vertices.size();
+	}
+	
+	@Override
+	public String toString() {
+		return this.vertices.toString();
 	}
 
 }
